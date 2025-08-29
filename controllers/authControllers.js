@@ -51,24 +51,24 @@ exports.protected = catchAsync(async (req, res, next) => {
   ) {
     token = req.headers.authorization.split(" ")[1];
   }
+
   if (!token) {
     return next(
       new AppError("You are not login , please login your account!", 400)
     );
   }
 
-  const decode = promisify(jsonwebtoken.verify)(
+  const decode = await promisify(jsonwebtoken.verify)(
     token,
     process.env.JWT_SECRET_CODE
   );
+
   const currentUser = await User.findById(decode.id);
   if (!currentUser) {
-    return new AppError(
-      "The user belonging to this token does no longer exist",
-      401
+    return next(
+      new AppError("The user belonging to this token does no longer exist", 401)
     );
   }
-
   req.user = currentUser;
   next();
 });

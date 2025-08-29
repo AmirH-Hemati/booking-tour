@@ -12,8 +12,8 @@ exports.sendTourUserId = (req, res, next) => {
   if (!req.body.user) req.body.user = req.user.id;
   next();
 };
-exports.getAllReviews = createOne(Review);
-exports.createReview = getAll(Review);
+exports.getAllReviews = getAll(Review);
+exports.createReview = createOne(Review);
 exports.getReview = getOne(Review);
 exports.updateReview = updateOne(Review);
 exports.deleteReview = deleteOne(Review);
