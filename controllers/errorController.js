@@ -38,7 +38,6 @@ function handelValidationErrorDB(error) {
   return new AppError(message, 400);
 }
 module.exports = (err, req, res, next) => {
-  console.log(process.env.NODE_ENV);
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
 

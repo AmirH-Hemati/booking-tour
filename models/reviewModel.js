@@ -1,0 +1,23 @@
+const mongoose = require("mongoose");
+
+const reviewSchema = new mongoose.Schema(
+  {
+    review: {
+      type: String,
+      required: [true, "Please provide your Review! "],
+    },
+    tour: {
+      type: mongoose.Schema.ObjectId,
+      required: [true, "Review must belong to a Tour !"],
+      ref: "Tour",
+    },
+    user: {
+      type: mongoose.Schema.ObjectId,
+      required: [true, "Review must belong to a User"],
+      ref: "User",
+    },
+  },
+  { toJSON: { virtuals: true }, toObject: { virtuals: true }, timestamps: true }
+);
+
+module.exports = mongoose.model("Review", reviewSchema);

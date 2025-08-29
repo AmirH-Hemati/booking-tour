@@ -1,5 +1,6 @@
 const path = require("path");
 const toursRouter = require("./routes/tourRoutes");
+const reviewRouter = require("./routes/reviewRoutes");
 // const usersRouter = require("./routes/userRoutes");
 const globalErrorController = require("./controllers/errorController");
 const express = require("express");
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/v1/tours", toursRouter);
+app.use("/api/v1/reviews", reviewRouter);
 
 // app.use("/api/v1/users", usersRouter);
 
