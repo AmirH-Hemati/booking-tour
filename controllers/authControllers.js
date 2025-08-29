@@ -27,8 +27,8 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!email || !password) {
     return next(new AppError("Please Provide your email and password", 400));
   }
-  const user = await User.findOnde({ email }).select("+password");
-  if (!user || (await user.correctPassword(password, user.password))) {
+  const user = await User.findOne({ email }).select("+password");
+  if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError("Invalid email or password!", 401));
   }
   const token = jsonwebtoken.sign(
