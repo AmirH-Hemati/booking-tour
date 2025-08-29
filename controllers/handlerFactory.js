@@ -16,7 +16,10 @@ exports.createOne = (Model) => {
 
 exports.getAll = (Model) => {
   return catchAsync(async (req, res, next) => {
-    const features = new ApiFeatures(Model.find(), req.query);
+    let filter = {};
+    if (req.params.tourId) filter = { tour: req.params.tourId };
+
+    const features = new ApiFeatures(Model.find(filter), req.query);
     const docs = await features.query;
 
     res.status(200).json({

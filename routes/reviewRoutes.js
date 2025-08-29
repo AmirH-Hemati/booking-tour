@@ -8,7 +8,7 @@ const {
   sendTourUserId,
 } = require("../controllers/reviewController");
 const { protected } = require("../controllers/authControllers");
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 router.use(protected);
 router.route("/").get(getAllReviews).post(sendTourUserId, createReview);
