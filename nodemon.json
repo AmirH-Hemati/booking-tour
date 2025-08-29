@@ -1,5 +1,5 @@
 {
-  "watch": ["."],
-  "ext": "js,json,pug",
+  "watch": [".", ".env"],
+  "ext": "js,pug,env,json",
   "exec": "node server.js"
 }
