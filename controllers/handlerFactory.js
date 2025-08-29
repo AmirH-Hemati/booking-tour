@@ -3,9 +3,7 @@ const catchAsync = require("../utils/catchAsync");
 const ApiFeatures = require("../utils/apiFeatures");
 exports.createOne = (Model) => {
   return catchAsync(async (req, rex, next) => {
-    const features = new ApiFeatures(Model.find(), req.query);
-
-    const doc = await features.query;
+    const doc = Model.create(req.body);
 
     res.status(201).json({
       status: "success",
@@ -18,7 +16,8 @@ exports.createOne = (Model) => {
 
 exports.getAll = (Model) => {
   return catchAsync(async (req, res, next) => {
-    const docs = await Model.find();
+    const features = new ApiFeatures(Model.find(), req.query);
+    const docs = await features.query;
 
     res.status(200).json({
       status: "success",
