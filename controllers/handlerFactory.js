@@ -3,7 +3,7 @@ const catchAsync = require("../utils/catchAsync");
 const ApiFeatures = require("../utils/apiFeatures");
 exports.createOne = (Model) => {
   return catchAsync(async (req, rex, next) => {
-    const doc = Model.create(req.body);
+    const doc = await Model.create(req.body);
 
     res.status(201).json({
       status: "success",
