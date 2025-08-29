@@ -29,9 +29,12 @@ exports.getAll = (Model) => {
   });
 };
 
-exports.getOne = (Model) => {
+exports.getOne = (Model, populateOption) => {
   return catchAsync(async (req, res, next) => {
-    const doc = await Model.findById(req.params.id);
+    let query = Model.findById(req.params.id);
+    if (populateOption) query = query.populate(populateOption);
+
+    const doc = await query;
     if (!doc) {
       return next(new AppError("No document found  with that ID! ", 404));
     }

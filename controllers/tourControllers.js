@@ -10,7 +10,7 @@ exports.getAllTours = getAll(Tour);
 
 exports.createTour = createOne(Tour);
 
-exports.getTour = getOne(Tour);
+exports.getTour = getOne(Tour, { path: "reviews" });
 
 exports.deleteTour = deleteOne(Tour);
 
