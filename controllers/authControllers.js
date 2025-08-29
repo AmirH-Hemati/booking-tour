@@ -4,7 +4,7 @@ const jsonwebtoken = require("jsonwebtoken");
 const User = require("../models/userModels");
 const AppError = require("../utils/appError");
 exports.signup = catchAsync(async (req, res, next) => {
-  const user = User.create({
+  const user = await User.create({
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
