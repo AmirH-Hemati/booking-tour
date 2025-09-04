@@ -1,6 +1,7 @@
 const path = require("path");
 const toursRouter = require("./routes/tourRoutes");
 const reviewRouter = require("./routes/reviewRoutes");
+const viewRouter = require("./routes/viewRoutes");
 const usersRouter = require("./routes/userRoutes");
 const globalErrorController = require("./controllers/errorController");
 const express = require("express");
@@ -11,9 +12,14 @@ const app = express();
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+
 app.use(express.json());
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
+
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use("/", viewRouter);
 app.use("/api/v1/tours", toursRouter);
 app.use("/api/v1/reviews", reviewRouter);
 

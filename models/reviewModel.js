@@ -6,6 +6,11 @@ const reviewSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide your Review! "],
     },
+    rating: {
+      type: Number,
+      min: 1,
+      max: 5,
+    },
     tour: {
       type: mongoose.Schema.ObjectId,
       required: [true, "Review must belong to a Tour !"],

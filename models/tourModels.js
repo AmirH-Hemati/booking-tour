@@ -63,12 +63,12 @@ const tourSchema = new mongoose.Schema(
     },
     images: [String],
     startDates: [Date],
-    // guides: [
-    //   {
-    //     type: mongoose.Schema.ObjectId,
-    //     ref: "User",
-    //   },
-    // ],
+    guides: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   {
     toJSON: { virtuals: true },
@@ -85,5 +85,10 @@ tourSchema.virtual("reviews", {
   ref: "Review",
   foreignField: "tour",
   localField: "_id",
+});
+
+tourSchema.pre(/^find/, function (next) {
+  this.populate({ path: "guides" });
+  next();
 });
 module.exports = mongoose.model("Tour", tourSchema);
