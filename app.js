@@ -4,9 +4,10 @@ const reviewRouter = require("./routes/reviewRoutes");
 const viewRouter = require("./routes/viewRoutes");
 const usersRouter = require("./routes/userRoutes");
 const globalErrorController = require("./controllers/errorController");
+const AppError = require("./utils/appError");
 const express = require("express");
 const morgan = require("morgan");
-const AppError = require("./utils/appError");
+const cookieParser = require("cookie-parser");
 const app = express();
 
 if (process.env.NODE_ENV === "development") {
@@ -14,6 +15,12 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use(express.json());
+app.use(cookieParser());
+app.use((req, res, next) => {
+  console.log(req.cookies);
+
+  next();
+});
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
